@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>小鹏汇天X2飞行汽车调研与安全分析</title>
+    <style>
+        body{max-width:1040px;margin:2rem auto;padding:0 24px;font-family:"Microsoft YaHei",sans-serif;line-height:1.8;color:#222;}
+        h1{color:#1a4b94;border-bottom:3px solid #2b64b8;padding-bottom:12px;font-size:28px;}
+        h2{color:#2058a8;margin-top:36px;font-size:22px;border-left:5px solid #3478d8;padding-left:12px;}
+        h3{color:#2c5799;margin-top:24px;font-size:18px;}
+        table{border-collapse:collapse;width:100%;margin:16px 0;}
+        th,td{border:1px solid #88a2cc;padding:10px;text-align:left;}
+        th{background-color:#e8f0fc;}
+        .nav{background:#f0f6ff;padding:12px;border-radius:8px;margin-bottom:24px;}
+        .nav a{margin-right:18px;color:#2058a8;text-decoration:none;font-weight:bold;}
+        .nav a:hover{text-decoration:underline;}
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="#part1">作业1：全方位调研分析</a>
+        <a href="#part2">作业2：系统安全深度分析</a>
+        <a href="#ref">参考文献</a>
+    </div>
+    <h1>小鹏汇天X2飞行汽车全方位调研与安全分析</h1>
+
+    <h2 id="part1">作业1：全方位调研分析</h2>
+    <h3>1. 产品概述</h3>
+    <p>小鹏汇天X2是纯电多旋翼载人eVTOL飞行器，无地面行驶功能，可承载2人，主打短途垂直起降低空出行，适用于应急救援、医疗转运、景区观光等场景。</p>
+    <ul>
+        <li>最大起飞重量：560kg</li>
+        <li>续航时长：35min，最大飞行高度1000m，最高速度130km/h</li>
+        <li>构型方案：8轴8电机分布式电推进</li>
+    </ul>
+    <h3>2. 关键技术拆解</h3>
+    <p>动力电池包带独立热管理；8组独立电机螺旋桨，推力冗余设计；飞控搭配多冗余IMU、GNSS，雷达+视觉融合避障；配备整机降落伞应急救生系统。</p>
+    <h3>3. 技术可行性分析</h3>
+    <p>优势：多旋翼天然容错、垂直起降不需要跑道、零尾气排放；短板：锂电池能量密度限制续航、低空噪声明显、低温环境电池衰减、结构振动疲劳风险。</p>
+    <h3>4. 应用场景</h3>
+    <p>优先落地：应急救援、医疗转运、景区观光；远期目标：城市空中出租UAM；约束条件：起降场站vertiport不足、空域管控严格。</p>
+    <h3>5. 市场可行性</h3>
+    <p>国内低空经济政策持续放开，CAAC适航认证是商业化门槛；当前整机造价高，低空保险、大众接受度仍有待完善。对标产品：亿航EH216、Joby S4。</p>
+    <h3>6. SWOT总结</h3>
+    <p>优势：国内自研进度快、飞控自主；劣势：续航短、载重有限；机会：低空经济政策红利；威胁：适航周期漫长，行业竞争激烈。</p>
+
+    <h2 id="part2">作业2：系统安全深度分析</h2>
+    <h3>1. 分析范围与安全目标</h3>
+    <p>研究对象：小鹏X2载人eVTOL；安全目标：满足载人飞行器灾难性失效概率≤10⁻⁹，遵循SAE ARP4754A、CAAC SC-VTOL规范。</p>
+    <h3>2. PHA初步危险清单</h3>
+    <ul>
+        <li>动力电池热失控、起火</li>
+        <li>驱动电机/螺旋桨失效、断裂</li>
+        <li>定位传感器丢星、避障感知失效</li>
+        <li>空中障碍物碰撞、鸟撞</li>
+        <li>整机降落伞无法正常开伞</li>
+        <li>大风、雷雨等恶劣天气造成姿态失控</li>
+    </ul>
+    <h3>3. FHA功能危险评估</h3>
+    <p>推进动力失效：危险等级【灾难性】；导航感知失效：【危险】；降落伞应急失效：【灾难性】；人机误操作：【重大】。</p>
+    <h3>4. FMEA失效模式分析</h3>
+    <table>
+        <tr><th>零部件</th><th>失效模式</th><th>局部影响</th><th>整机影响</th><th>补偿方案</th></tr>
+        <tr><td>驱动电机</td><td>电机停转</td><td>单路旋翼推力丢失</td><td>飞行器姿态失衡</td><td>8通道冗余，单电机故障仍可控</td></tr>
+        <tr><td>动力电池</td><td>热失控</td><td>电芯起火</td><td>空中起火坠毁</td><td>电池分区隔离、实时温度监测、阻燃外壳</td></tr>
+        <tr><td>GNSS定位模块</td><td>丢星失效</td><td>位置信息丢失</td><td>无法自主导航</td><td>IMU+视觉多传感器融合备份</td></tr>
+    </table>
+    <h3>5. FTA故障树（顶事件：空中坠毁）</h3>
+    <p>空中坠毁 =（多通道动力同时失效）OR（主飞控计算机失效）OR（降落伞失效+剩余推力不足以维持可控）</p>
+    <h3>6. 现有安全设计与残余风险</h3>
+    <p>现有安全措施：8路动力冗余、整机降落伞、电池阻燃防护、多套感知备份；残余风险：城市高楼峡谷间感知盲区、电池热失控连锁扩散风险。</p>
+    <p>优化建议：加装激光雷达、严格限制大风工况飞行包线、独立电池防火隔舱。</p>
+
+    <h2 id="ref">参考文献</h2>
+    <ul>
+        <li>CAAC SC-VTOL 电动垂直起降飞行器适航规范</li>
+        <li>SAE ARP4754A 民用飞机开发与安全工程</li>
+        <li>小鹏汇天X2产品白皮书</li>
+    </ul>
+</body>
+</html>
